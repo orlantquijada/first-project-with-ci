@@ -5,3 +5,5 @@ __pycache__/
 
 .vscode/
 .vim/
+
+db.sqlite3
