@@ -12,6 +12,8 @@ class UniversityTests(APITestCase):
 
     url = "/api/v1/universities/"
     factory = UniversityFactory
+    serializer = UniversityModelSerializer
+    model = University
 
     def test_create_university(self):
         data = {"name": self.factory.name()}
@@ -21,18 +23,26 @@ class UniversityTests(APITestCase):
 
     def test_list_universities(self):
         number_of_universities_to_create = 5
-        self.factory.create_batch(number_of_universities_to_create)
+        universities = self.factory.create_batch(number_of_universities_to_create)
+        serializer = self.serializer(universities, many=True)
 
         response = self.client.get(self.url)
 
-        self.assertEqual(University.objects.count(), number_of_universities_to_create)
+        self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve_university(self):
         university = self.factory()
-        serializer = UniversityModelSerializer(university)
+        serializer = self.serializer(university)
 
         response = self.client.get(f"{self.url}{university.id}/")
 
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_delete_university(self):
+        university = self.factory()
+
+        response = self.client.delete(f"{self.url}{university.id}/")
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
