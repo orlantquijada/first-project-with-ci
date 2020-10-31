@@ -21,6 +21,7 @@ flake8 = "^3.8.4"
 factory_boy = "^3.1.0"
 faker = "^4.14.0"
 pre-commit = "^2.7.1"
+coverage = {version = "^5.3", extras = ["toml"]}
 
 [build-system]
 requires = ["poetry>=0.12"]
@@ -43,4 +44,10 @@ lines_after_imports = 2
 use_parentheses = true
 src_paths = ["backend"]
 filter_files = true
-known_third_party = ["django", "rest_framework", "faker", "factory"]
+known_third_party = ["django", "rest_framework", "faker", "factory", "rest_framework_simplejwt"]
+
+[tool.coverage.paths]
+source = ["backend"]
+
+[tool.coverage.run]
+command_line = "./manage.py test"

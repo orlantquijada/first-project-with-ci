@@ -1,14 +1,16 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from . import factories
-from . import models
+from backend.generics.clients import StudentAPIClient
+from backend.users import factories
+from backend.users import models
 
 
 class UniversityTests(APITestCase):
-    def setUp(self):
-        self.url = "/api/v1/universities/"
-        self.factory = factories.UniversityFactory
+    client_class = StudentAPIClient
+
+    url = "/api/v1/universities/"
+    factory = factories.UniversityFactory
 
     def test_create_university(self):
         data = {"name": self.factory.name()}

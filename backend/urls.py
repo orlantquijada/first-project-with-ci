@@ -17,9 +17,17 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 from .todo.views import TaskViewSet
 from .users.views import UniversityViewSet
+
+
+urlpatterns = [
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+]
 
 
 ROUTER = DefaultRouter()
@@ -27,4 +35,8 @@ ROUTER.register("tasks", TaskViewSet)
 ROUTER.register("universities", UniversityViewSet)
 
 
-urlpatterns = [path("admin/", admin.site.urls), path("api/v1/", include(ROUTER.urls))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/v1/", include(ROUTER.urls)),
+    path("api/v1/token/obtain", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+]
