@@ -3,6 +3,7 @@ from rest_framework.test import APITestCase
 
 from backend.generics.clients import StudentAPIClient
 from backend.users.api.base import UniversityModelSerializer
+from backend.users.choices import UserType
 from backend.users.factories import UniversityFactory
 from backend.users.models import University
 
@@ -46,3 +47,11 @@ class UniversityTests(APITestCase):
         response = self.client.delete(f"{self.url}{university.id}/")
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_user_type(self):
+        response = self.client.get(f"{self.url}test_user/")
+
+        print(response.data)
+
+        # assert actual == expected
+        self.assertEqual(response.data, UserType.STUDENT)
