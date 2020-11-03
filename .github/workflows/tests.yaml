@@ -1,0 +1,31 @@
+name: Integration Tests
+
+on: [pull_request]
+
+jobs:
+    tests:
+        name: Integration Tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: 3.8
+
+            - name: Install Poetry
+              run: pip install --upgrade pip poetry
+
+            - name: Configure poetry
+              shell: bash
+              run: poetry config virtualenvs.in-project true
+
+            - name: Install dependencies
+              shell: bash
+              run: poetry install
+
+            - name: Run Tests
+              shell: bash
+              run: poetry run python manage.py test

@@ -6,4 +6,6 @@ __pycache__/
 .vscode/
 .vim/
 
+htmlcov
+.coverage
 db.sqlite3
