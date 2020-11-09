@@ -1,7 +1,10 @@
 from factory import PostGenerationMethodCall
 from factory import SubFactory
+from factory import Faker as factory_faker
+from factory import LazyAttribute
 from factory.django import DjangoModelFactory
 from faker import Faker
+from faker.providers import BaseProvider
 
 from . import choices
 from . import models
@@ -30,4 +33,4 @@ class UserFactory(DjangoModelFactory):
     last_name = faker.last_name
 
     university = SubFactory(UniversityFactory)
-    user_type = faker.random_element(choices.UserType.values)
+    user_type = _user_type
