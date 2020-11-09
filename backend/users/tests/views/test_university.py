@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 from backend.generics.clients import StudentAPIClient
 from backend.users.api.base import UniversityModelSerializer
 from backend.users.choices import UserType
-from backend.users.factories import UniversityFactory, UserFactory
+from backend.users.factories import UniversityFactory
 from backend.users.models import University
 
 
@@ -50,8 +50,6 @@ class UniversityTests(APITestCase):
 
     def test_user_type(self):
         response = self.client.get(f"{self.base_url}test_user/")
-
-        print(response.data)
 
         # assert actual == expected
         self.assertEqual(response.data, UserType.STUDENT)
