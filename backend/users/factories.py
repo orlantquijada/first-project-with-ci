@@ -22,6 +22,10 @@ class UniversityFactory(DjangoModelFactory):
 
 
 class UserFactory(DjangoModelFactory):
+    @classmethod
+    def _user_type(cls):
+        return faker.random_element(choices.UserType.values)
+
     class Meta:
         model = models.User
         django_get_or_create = ["username"]
