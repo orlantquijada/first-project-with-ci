@@ -18,6 +18,12 @@ jobs:
             - name: Install Poetry
               run: pip install --upgrade pip poetry
 
+            - name: Cache multiple paths
+              uses: actions/cache@v2
+              with:
+                path: .venv/
+                key: poetry-${{ hashFiles('**/poetry.lock') }}
+
             - name: Configure poetry
               shell: bash
               run: poetry config virtualenvs.in-project true
