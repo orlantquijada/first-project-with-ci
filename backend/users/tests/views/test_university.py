@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 from backend.generics.clients import StudentAPIClient
 from backend.users.api.base import UniversityModelSerializer
 from backend.users.choices import UserType
-from backend.users.factories import UniversityFactory, UserFactory
+from backend.users.factories import UniversityFactory
 from backend.users.models import University
 
 

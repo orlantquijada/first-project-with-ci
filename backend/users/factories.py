@@ -1,10 +1,7 @@
 from factory import PostGenerationMethodCall
 from factory import SubFactory
-from factory import Faker as factory_faker
-from factory import LazyAttribute
 from factory.django import DjangoModelFactory
 from faker import Faker
-from faker.providers import BaseProvider
 
 from . import choices
 from . import models
