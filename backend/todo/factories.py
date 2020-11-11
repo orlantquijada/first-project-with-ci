@@ -4,7 +4,7 @@ from faker import Faker
 
 from backend.users.factories import UserFactory
 
-from .models import Task
+from .models import Task  # NOQA
 
 
 faker = Faker()
